@@ -26,27 +26,20 @@ func init() {
 	img.Fill(currentColor)
 }
 
-func generateImage() {
-	img.Fill(currentColor)
-}
-
 func update(screen *ebiten.Image) error {
 	if ebiten.IsRunningSlowly() {
 		return nil
 	}
 
-	generateImage()
+	img.Fill(currentColor)
 
 	op := &ebiten.DrawImageOptions{}
 	screen.DrawImage(img, op)
-
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("%2.f FPS", ebiten.CurrentFPS()))
-
 	return nil
 }
 
 func main() {
-
 	go func() {
 		for range time.Tick(colorBeat * time.Millisecond) {
 			currentColor = p.next()
